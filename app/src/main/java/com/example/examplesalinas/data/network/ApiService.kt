@@ -1,19 +1,44 @@
 package com.example.examplesalinas.data.network
 
 import com.example.examplesalinas.core.RetrofilHelper
-import com.example.examplesalinas.data.model.ResponseModel
+import com.example.examplesalinas.data.model.PokeApiResponseModel
+import com.example.examplesalinas.data.model.ResponseStarWars2Model
+import com.example.examplesalinas.data.model.StarWarsResponseModel
+import com.example.examplesalinas.data.model.StarWarsResponseModelItem
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
 class ApiService {
 
-    private val retrofitHelper = RetrofilHelper.retrofitObject()
+    private val retrofitStarWars = RetrofilHelper.retrofitObjectStartWars()
+    private val retrofitPokemons = RetrofilHelper.retrofitObjectPokemons()
+    private val retrofitStarWars2 = RetrofilHelper.retrofitObjectStartWars2()
 
-    suspend fun getService():ResponseModel {
+
+
+    suspend fun getPokemons(): PokeApiResponseModel {
         return withContext(Dispatchers.IO){
-            val response = retrofitHelper
+            val response = retrofitPokemons
                 .create(Api::class.java)
-                .getService()
+                .servicePokemons()
+            response
+        }
+    }
+
+    suspend fun getStarWarsCharacters(): List<StarWarsResponseModelItem> {
+        return withContext(Dispatchers.IO){
+            val response = retrofitStarWars
+                .create(Api::class.java)
+                .serviceStarWars()
+            response
+        }
+    }
+
+    suspend fun getStarWarsSWAPI(): ResponseStarWars2Model {
+        return withContext(Dispatchers.IO){
+            val response = retrofitStarWars2
+                .create(Api::class.java)
+                .serviceStarWars2()
             response
         }
     }

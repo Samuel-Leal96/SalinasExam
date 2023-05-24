@@ -4,29 +4,29 @@ import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.examplesalinas.data.model.ResponseModel
-import com.example.examplesalinas.domain.GetApi
+import com.example.examplesalinas.data.model.StarWarsResponseModel
+import com.example.examplesalinas.data.network.Api
+import com.example.examplesalinas.domain.GetStarWarsSWAPIUseCase
+import com.example.examplesalinas.domain.GetStarWarsUseCase
+import com.google.gson.GsonBuilder
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 
 class MainActivityViewModel: ViewModel() {
 
-    val response = MutableLiveData<ResponseModel?>()
+    val personajesModel = MutableLiveData<StarWarsResponseModel?>()
 
     var resultFlow = MutableStateFlow<Boolean?>(null)
 
-    val responseRepository = GetApi().iniciarServicio
+    val getPersonajeUseCase = GetStarWarsSWAPIUseCase()
 
     fun startService(){
         viewModelScope.launch {
-            val result = responseRepository()
+            val result = getPersonajeUseCase()
 
-            if (result != null){
-                response.value = result
-                resultFlow.value = true
-            }else{
-                resultFlow.value = false
-            }
+            Log.d("resultVM", result.toString() )
         }
     }
 }

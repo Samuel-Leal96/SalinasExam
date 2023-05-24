@@ -1,5 +1,7 @@
 package com.example.examplesalinas.core
 
+import com.example.examplesalinas.data.network.Api
+import com.google.gson.GsonBuilder
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -7,20 +9,26 @@ import java.util.concurrent.TimeUnit
 
 object RetrofilHelper {
 
-    private fun clientTimeOut(): OkHttpClient {
-
-        return OkHttpClient.Builder()
-            .connectTimeout(60, TimeUnit.SECONDS)
-            .readTimeout(60, TimeUnit.SECONDS)
-            .writeTimeout(60, TimeUnit.SECONDS)
-            .build()
-    }
-
-    fun retrofitObject(): Retrofit{
+    fun retrofitObjectPokemons(): Retrofit{
         return Retrofit.Builder()
-            .baseUrl(Constans.url)
-            .addConverterFactory(GsonConverterFactory.create())
-            .client(clientTimeOut())
+            .baseUrl(Constans.urlPokeApi)
+            .addConverterFactory(GsonConverterFactory.create(GsonBuilder().create()))
             .build()
     }
+
+    fun retrofitObjectStartWars(): Retrofit{
+        return Retrofit.Builder()
+            .baseUrl(Constans.urlStarWars)
+            .addConverterFactory(GsonConverterFactory.create(GsonBuilder().create()))
+            .build()
+    }
+
+    fun retrofitObjectStartWars2(): Retrofit{
+        return Retrofit.Builder()
+            .baseUrl(Constans.baseUrlStarWars)
+            .addConverterFactory(GsonConverterFactory.create(GsonBuilder().create()))
+            .build()
+    }
+
+
 }

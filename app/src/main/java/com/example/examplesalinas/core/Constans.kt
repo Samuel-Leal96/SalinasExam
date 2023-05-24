@@ -2,8 +2,17 @@ package com.example.examplesalinas.core
 
 object Constans {
 
-    const val url = "https://akabab.github.io/starwars-api/"
+    //TODO Salinas StarWars
+    const val urlStarWars = "https://akabab.github.io/starwars-api/api/"
+    const val endpointStarWars = "all.json"
 
-    const val endpointFinal = "api/all.json"
+    //TODO Pomkemon Api
+    const val urlPokeApi ="https://pokeapi.co/api/v2/"
+    const val endpointPokeApi = "pokemon/ditto"
+
+    //TODO StarWars Api
+    const val baseUrlStarWars = "https://swapi.dev/api/"
+    const val endpointStarWars2 = "people"
+
 
 }

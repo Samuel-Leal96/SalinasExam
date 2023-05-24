@@ -1,3 +1,3 @@
 package com.example.examplesalinas.data.model
 
-data class ErrorResponseModel(val error: String)
+data class ErrorResponseModel(var error: String)
